@@ -138,29 +138,24 @@ export default {
       }).finally(() => { this.loading = false })
     },
     formatSeconds(value) {
-      var secondTime = parseInt(value) // 秒
-      var minuteTime = 0 // 分
-      var hourTime = 0 // 小时
+      let secondTime = value// 秒
+      let minuteTime = 0 // 分
+      let hourTime = 0 // 小时
       if (secondTime > 60) {
         // 获取分钟，除以60取整数，得到整数分钟
         minuteTime = parseInt(secondTime / 60)
         // 获取秒数，秒数取佘，得到整数秒数
-        secondTime = parseInt(secondTime % 60)
+        secondTime = secondTime % 60
         // 如果分钟大于60，将分钟转换成小时
         if (minuteTime > 60) {
           // 获取小时，获取分钟除以60，得到整数小时
           hourTime = parseInt(minuteTime / 60)
           // 获取小时后取佘的分，获取分钟除以60取佘的分
-          minuteTime = parseInt(minuteTime % 60)
+          minuteTime = minuteTime % 60
         }
       }
-      var result = '' + parseInt(secondTime)
-      if (minuteTime > 0) {
-        result = '' + parseInt(minuteTime) + ':' + result
-      }
-      if (hourTime > 0) {
-        result = '' + parseInt(hourTime) + ':' + result
-      }
+      const result = '' + hourTime + ':' + minuteTime + ':' + secondTime
+
       return result
     },
     handleFind() {
@@ -231,7 +226,15 @@ export default {
     },
     getAllStatus() {
       getAllDevStatus().then(res => {
-        this.list = res.data
+        const temp = res.data // 数组
+        for (var i = 0; i < temp.length; i++) {
+          let curr=temp[i]
+          temp[i].time = this.formatSeconds(curr.time)
+          temp[i].freetime = this.formatSeconds(curr.freetime)
+          temp[i].alerttime = this.formatSeconds(curr.alerttime)
+        }
+        console.log(JSON.stringify(temp))
+        this.list = temp
       })
     }
   }
@@ -249,7 +252,7 @@ export default {
     font-weight: bold;
   }
   .minitor-table .row-off {
-    background: #8c9292;
+    background: #101318;
     height: 80px;
   }
   .el-table--enable-row-hover .el-table__body .row-off:hover>td{
