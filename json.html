@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let s= {
+    deviceId: 'this.$route.query.id',
+    deviceName: 'MTDC',
+    ip: '10.110.20.30',
+    operator: '张三',
+    infoList: [{
+      id: 0,
+      title: '基本信息',
+      subInfo: [{
+        id: 0,
+        name: '当前加工程序',
+        value: 'OIQW-2'
+      },
+        {
+          id: 1,
+          name: '加工零件个数',
+          value: '221'
+        },
+        {
+          id: 2,
+          name: '当前操作模式',
+          value: '自动'
+        }
+      ]
+    },
+      {
+        id: 1,
+        title: '参数信息',
+        subInfo: [{
+          id: 0,
+          name: '当前加工程序',
+          value: 'OIQW-2'
+        },
+          {
+            id: 1,
+            name: '加工零件个数',
+            value: '221'
+          },
+          {
+            id: 2,
+            name: '当前操作模式',
+            value: '自动'
+          }
+        ]
+      }
+    ]
+  }
+  console.log(JSON.stringify(s))
+</script>
+</body>
+</html>
